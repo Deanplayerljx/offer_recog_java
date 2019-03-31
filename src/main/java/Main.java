@@ -9,6 +9,7 @@ public class Main {
 
     static final String imageFolderPath="iimage/";
     static final String templatePath = "template5.jpg";
+    static final String matchingResultPath = "tmp/";
     static final String[] imageNames = {"test1.jpeg","test2.jpeg","test3.jpg","test4.jpg","test5.jpg","test6.jpg","test_hard1.jpg","test_hard2.jpg","test_hard3.jpeg"};
     public static void main(String[] args) {
 
@@ -74,9 +75,9 @@ public class Main {
 
         Imgproc.rectangle(image, new Point(startX, startY), new Point(endX, endY), new Scalar(255, 0, 0));
         Mat cropped = image.submat(startY, endY,startX, endX);
-
-        Imgcodecs.imwrite(outFileName, cropped);
-        File imageFile = new File(outFileName);
+        
+        Imgcodecs.imwrite(matchingResultPath+outFileName, cropped);
+        File imageFile = new File(matchingResultPath+outFileName);
         try {
             String result = instance.doOCR(imageFile);
             result = result.replaceAll("[\\s'!]","").toLowerCase();
